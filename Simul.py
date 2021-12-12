@@ -5,7 +5,7 @@ class Simul:
     __starting_Hand_Size: int = 7
     __n_Iterations: int = 1000000  # A million simulations per set
 
-    def __init__(self, n_lands: int, cmc: int, n_cards: int, colors_needed: int):
+    def __init__(self, starting_hand_size: int = 7, n_iterations: int = 1000000):
         """
             Starts simul with the given params
             :param n_lands: number of lands in deck
@@ -18,7 +18,8 @@ class Simul:
         # The entire simulation is based on being on the play since the odds of drawing the required sources on the
         # draw are higher (because we take an extra draw step), so we take "on the play" odds, which are "worse" for
         # mana base restrictions.
-        self.start_simul(n_lands, cmc, n_cards, colors_needed)
+        self.__starting_Hand_Size = starting_hand_size
+        self.__n_Iterations = n_iterations
 
     def start_simul(self, n_lands: int, cmc: int, n_cards: int, colors_needed: int):
         """
@@ -72,7 +73,7 @@ class Simul:
             print("The deck had a mulligan rate of %f in total" % mulligan_rate)
             print("--------------------------------------------------------------------------------")
             if success_rate <= min((90 + cmc), 95):
-                return {success_rate, curving_landrops, mulligan_rate}
+                return success_rate, curving_landrops, mulligan_rate
 
     @staticmethod
     def new_card(lands_in_hand, good_lands_in_hand, deck):

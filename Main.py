@@ -34,7 +34,10 @@ def main():
         print("The number of lands can't be equal or higher to the number of cards in the deck!")
         return -1
     colors_needed = args.colors_needed
-    Simul(n_lands, cmc, n_cards, colors_needed)
+    simulator = Simul()
+    success_rate, curving_landrops, mulligan_rate = simulator.start_simul(n_lands, cmc, n_cards, colors_needed)
+    print("Casting success rate: %f, Curving landrops rate: %f, Mulligan rate: %f" % (success_rate, curving_landrops,
+                                                                                      mulligan_rate))
     return 0
 
 
