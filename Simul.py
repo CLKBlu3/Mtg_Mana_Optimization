@@ -68,12 +68,12 @@ class Simul:
             success_rate = (count_lands_great / count_lands_ok) * 100.0
             curving_landrops = (count_lands_ok / self.__n_Iterations) * 100.0
             mulligan_rate = (n_mulligans / self.__n_Iterations) * 100.0
-            print("Number of good lands: %d, success rate = %f " % (n_good_lands, success_rate))
-            print("The deck hits enough landrops with a success rate of %f" % curving_landrops)
-            print("The deck had a mulligan rate of %f in total" % mulligan_rate)
-            print("--------------------------------------------------------------------------------")
+            # print("Number of good lands: %d, success rate = %f " % (n_good_lands, success_rate))
+            # print("The deck hits enough landrops with a success rate of %f" % curving_landrops)
+            # print("The deck had a mulligan rate of %f in total" % mulligan_rate)
+            # print("--------------------------------------------------------------------------------")
             if success_rate <= min((90 + cmc), 95):
-                return success_rate, curving_landrops, mulligan_rate
+                return success_rate, curving_landrops, mulligan_rate, n_good_lands
 
     @staticmethod
     def new_card(lands_in_hand, good_lands_in_hand, deck):

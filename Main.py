@@ -14,10 +14,10 @@ def main():
     :return:
     """
     parser = argparse.ArgumentParser()
-    parser.add_argument("nLands", help="Total number of lands in the deck. (int), mandatory.", type=int)
+    parser.add_argument("nLands", help="Total number of lands in the deck. (int)", type=int)
     parser.add_argument("cmc", help="CMC of the card desired to cast. (int)", type=int)
     parser.add_argument("colors_needed", help="Number of colored sources to cast the spell. (int)", type=int, default=0)
-    parser.add_argument("nCards", help="Total number of  cards in the deck. (int) Default: 60", type=int, default=60)
+    parser.add_argument("nCards", help="Total number of  cards in the deck. (int)", type=int, default=60)
     args = parser.parse_args()
     n_lands = args.nLands
     if n_lands <= 3:
@@ -35,9 +35,10 @@ def main():
         return -1
     colors_needed = args.colors_needed
     simulator = Simul()
-    success_rate, curving_landrops, mulligan_rate = simulator.start_simul(n_lands, cmc, n_cards, colors_needed)
-    print("Casting success rate: %f, Curving landrops rate: %f, Mulligan rate: %f" % (success_rate, curving_landrops,
-                                                                                      mulligan_rate))
+    success_rate, curving_landrops, mulligan_rate, good_lands = simulator.start_simul(n_lands, cmc, n_cards,
+                                                                                      colors_needed)
+    print("Needed good lands: %d, Casting success rate: %f, Curving landrops rate: %f, Mulligan rate: %f"
+          % (good_lands, success_rate, curving_landrops, mulligan_rate))
     return 0
 
 
