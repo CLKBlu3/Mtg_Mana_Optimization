@@ -51,6 +51,7 @@ class Simul:
                     # so we are not repeating the simul as if this was the London nor Vancouver mulligan rule,
                     # but we count how many mulls we have taken.
                     n_mulligans += 1
+                    continue
 
                 # We continue to draw cards until CMC of the card is reached
                 for x in range(1, cmc):
@@ -66,7 +67,7 @@ class Simul:
                     count_lands_ok += 1
             # End of the 1000000 iterations
             success_rate = (count_lands_great / count_lands_ok) * 100.0
-            curving_landrops = (count_lands_ok / self.__n_Iterations) * 100.0
+            curving_landrops = (count_lands_ok / (self.__n_Iterations - n_mulligans)) * 100.0
             mulligan_rate = (n_mulligans / self.__n_Iterations) * 100.0
             # print("Number of good lands: %d, success rate = %f " % (n_good_lands, success_rate))
             # print("The deck hits enough landrops with a success rate of %f" % curving_landrops)
